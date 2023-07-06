@@ -1,0 +1,78 @@
+.bgColor{
+    background: linear-gradient(to bottom, #ff0000, #00ff00);
+}
+.searchStyle{
+    border-radius: 25px;
+    font-size: 1rem;
+    font-style: italic;
+    color: white;
+}
+.priceStyle{
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-style: italic;
+}
+.titleEllips {
+    display: -webkit-box; /* Abilita il layout box per il troncamento del testo */
+    -webkit-box-orient: vertical; /* Imposta l'orientamento verticale per il troncamento del testo */
+    -webkit-line-clamp: 2; /* Imposta il numero massimo di righe da visualizzare */
+    height: 2.5em; /* Imposta l'altezza a 2.5 righe */
+    overflow: hidden; /* Nasconde il contenuto oltre le 2 righe */
+    text-overflow: ellipsis; /* Aggiunge i puntini di ellipsis quando il testo viene troncato */
+  }
+  .selected{
+    border: 4px solid #f50909;
+    transform: scale(1);
+    transition: transform 0.2s ease-in-out;
+  }
+  .selected:hover {
+    border: 3px solid red;
+    transform: scale(1.1);
+    z-index: 5;
+  }
+
+  .carouselTitles{
+    color: black;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-shadow: 4px 3px 3px #ccd8f7;
+  }
+  .smallTitle{
+    color: rgb(240, 238, 238);
+    font-size: 1.5rem;
+    text-shadow: 3px 3px 2px #0b1222;
+  }
+  .categoryText{
+    padding: 2px;
+    text-align: center;
+    border: solid 1px black;
+    background-color: #99e1f3;
+    border-radius: 10px;
+  }
+  .commentTitle{
+    padding: 2px;
+    text-align: center;
+    border: solid 1px black;
+    background-color: #99e1f3;
+    border-radius: 10px;
+  }
+  .boxComment {
+    border: solid 2px black;
+    border-radius: 5px;
+    background-color: #cef1ce;
+  }
+  .loading-text {
+    visibility: hidden;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 1s steps(10, end);
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }

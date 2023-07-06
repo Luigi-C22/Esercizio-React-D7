@@ -1,0 +1,16 @@
+.commentsModal{
+    background: rgba(0, 0, 0, 0.8);
+}
+.custom-input{
+    width: 300px;
+    height: 90px;
+    text-align: start;
+    
+}
+.categoryText{
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    border-radius: 10px;
+    font-style: italic;
+    background-color: brown;
+}
