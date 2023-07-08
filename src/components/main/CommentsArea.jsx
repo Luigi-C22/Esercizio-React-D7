@@ -1,12 +1,13 @@
   import React, { useState, useEffect } from 'react';
   import { ListGroup, Form, Button, Spinner }from 'react-bootstrap';
-  
-  const CommentsArea = ({ asin }) => {
-    const [bookComments, setBookComments] = useState([]);
-    const [newComment, setNewComment] = useState('');
-    const [newRate, setNewRate] = useState('');
-    const [selectedCommentId, setSelectedCommentId] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+  import '../main/Card.css';
+
+  const CommentsArea = ({ asin }) => {     //definisce il componente CommentArea
+    const [bookComments, setBookComments] = useState([]); // definisce l'array che conterrà i commenti
+    const [newComment, setNewComment] = useState('');  // tiene traccia di un eventuale nuovo commento
+    const [newRate, setNewRate] = useState(''); // tiene traccia di un eventuale nuovo voto
+    const [selectedCommentId, setSelectedCommentId] = useState(null); // tiene traccia dell'id del commento da modificare
+    const [isLoading, setIsLoading] = useState(true); // controlla il caricamento dei commenti
   
     const getCommentsFromBook = async () => {
       try {
@@ -20,15 +21,15 @@
           }
         );
         const data = await response.json();
-        setBookComments(data);
+        setBookComments(data); //imposta i commenti
         setIsLoading(false);
       } catch (error) {
         console.log(error);
-        setIsLoading(false);
+        setIsLoading(false); // imposta lo stato di caricamento dei commenti
       }
     };
   
-    const postComment = async () => {
+    const postComment = async () => {    // funzione che invia nuovi commenti all'API
       try {
         await fetch('https://striveschool-api.herokuapp.com/api/comments/', {
           method: 'POST',
@@ -44,7 +45,7 @@
           }),
         });
   
-        setNewComment('');
+        setNewComment(''); //reimposta a valori vuoti le variabili di stato
         setNewRate('');
         getCommentsFromBook();
       } catch (error) {
@@ -52,7 +53,7 @@
       }
     };
   
-    const deleteComment = async (commentId) => {
+    const deleteComment = async (commentId) => {  //funzione che elimina i commenti 'DELETE'
       try {
         await fetch(
           `https://striveschool-api.herokuapp.com/api/comments/${commentId}`,
@@ -64,13 +65,13 @@
             },
           }
         );
-        getCommentsFromBook();
+        getCommentsFromBook(); //dopo l'eliminazione si aggiornano i commenti rimasti
       } catch (error) {
         console.log(error);
       }
     };
   
-    const updateComment = async (commentId, updatedComment) => {
+    const updateComment = async (commentId, updatedComment) => { //funzione per modificare i commenti 'PUT'
       try {
         if (commentId ===selectedCommentId) {
           await fetch(
@@ -88,16 +89,16 @@
             }
           );
   
-          getCommentsFromBook();
-          setSelectedCommentId(null);
+          getCommentsFromBook();  //aggiorna i commenti
+          setSelectedCommentId(null); //l'id viene reimpostato a null in attesa di una nuova selezione
         }
       } catch (error) {
         console.log(error);
       }
     };
   
-    useEffect(() => {
-      getCommentsFromBook();
+    useEffect(() => {   //esegue l'effetto di caricamento dei commenti quando l'asin cambia
+      getCommentsFromBook(); // getCommentsFromBook viene richiamata ogni volta che cambia l'asin
     }, [asin]);
   
     return (
@@ -109,13 +110,13 @@
         ) : (
           <>
             {bookComments.map((comment) => (
-              <ListGroup
+              <ListGroup 
                 key={comment._id}
                 className="d-flex justify-content-between align-items-start"
                 as="ol"
                 numbered
               >
-                <div className="ms-2 me-auto">
+                <div className="ms-2 me-auto boxComment">
                   {selectedCommentId === comment._id ? (
                     <Form.Control
                       type="text"
@@ -126,7 +127,7 @@
                     <div>{comment.comment}</div>
                   )}
                   <div>Voto: {comment.rate}</div>
-                </div>
+                
                 <div>
                   {selectedCommentId === comment._id ? (
                     <Button
@@ -152,6 +153,7 @@
                   >
                     Elimina
                   </Button>
+                </div>
                 </div>
               </ListGroup>
             ))}

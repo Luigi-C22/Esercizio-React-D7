@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-//import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import '../main/Card.css';
 
-const SingleBook = ({ img, asin, title, price, category, onClick, selected }) => {
-  const [isSelected, setIsSelected] = useState(selected);
+const SingleBook = ({ img, asin, title, price, category, onClick, selected }) => {  //definisce il componente 'singleBook' che accetta le proprietà dei libri
+  const [isSelected, setIsSelected] = useState(selected); //tiene traccia se la card  sia selezionata o no
 
-  const toggleSelected = () => {
+  const toggleSelected = () => {   //gestisce il clic sulla card 
     setIsSelected(!isSelected);
     onClick(asin);
   };
